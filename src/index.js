@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+//import CardList from './hsApi';
 //var React = require('react');
 //var ReactDOM = require('react-dom');
 
 var addButonText = '+';
 var subtractButtonText = '-';
 var rootElement = document.getElementById("counter");
+const rootElement2 = document.getElementById("hsApi");
 var values = [1, 5, 10, 50, 100, 500];
 
 class Adder extends React.Component {
@@ -95,4 +97,36 @@ class App extends React.Component {
     }
 }
 
+const Card = (props) => {
+    return (
+        <div style={{ margin: '1em' }}>
+            <img style={{ width: '150px', objectFit: 'contain' }} src={props.card_image_url} />
+            <div style={{ display: 'inline-block', marginLeft: 10 }}>
+                <div style={{ fontSize: '1.25em', fontWeight: 'bold' }}>{props.card_name}</div>
+                <div>{props.card_effect}</div>
+            </div>
+        </div>
+    );
+};
+
+let data = [{
+    card_image_url: "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_571.png",
+    card_name: "Force of Nature",
+    card_effect: "Summon three 2/2 Treants."
+}, {
+    card_image_url: "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_571.png",
+    card_name: "Force of Nature",
+    card_effect: "Summon three 2/2 Treants."
+}
+];
+
+const CardList = (props) => {
+    return (
+        <div>
+            {props.cards.map(card => <Card {...card} />)}
+        </div>
+    );
+};
+
 ReactDOM.render(<App />, rootElement);
+ReactDOM.render(<CardList cards={data} />, rootElement2);

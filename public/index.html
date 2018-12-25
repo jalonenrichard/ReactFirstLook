@@ -16,6 +16,7 @@
     crossorigin="anonymous"></script>
   <!-- Don't use this in production: -->
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <script src="../src/hsApi.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
   <title>React First Look</title>
 </head>
@@ -24,14 +25,26 @@
   <div class="container">
     <div class="album py-5 bg-light">
       <div class="container">
-        <div class="col-md-6">
-          <div class="card mb-6 box-shadow">
-            <h5 class="card-header">Counter</h5>
-            <div id="counter" class="card-body"></div>
+
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card mb-6 box-shadow">
+              <h5 class="card-header">Counter</h5>
+              <div id="counter" class="card-body"></div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card mb-6 box-shadow">
+              <h5 class="card-header">HS API data</h5>
+              <div id="hsApi" class="card-body"></div>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
+  </div>
   </div>
 </body>
 
