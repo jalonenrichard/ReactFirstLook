@@ -7,13 +7,6 @@ var addButonText = '+';
 var subtractButtonText = '-';
 var rootElement = document.getElementById("root");
 var values = [1, 5, 10, 50, 100, 500, 1000];
-var firstValue = 1;
-var secondValue = 5;
-var thirdValue = 10;
-var fourthValue = 50;
-var fifthValue = 100;
-var sixthValue = 500;
-var seventhValue = 1000;
 
 class Adder extends React.Component {
     handleClick = () => {
@@ -77,23 +70,23 @@ class App extends React.Component {
         return adders
     }
 
+    createSubtractButtons = () => {
+        let subtracters = []
+
+        for (let i = 0; i < values.length; i++) {
+            subtracters.push(
+                <Subtracter subtracterValue={values[i]} onClickFuncion={this.subtract} />
+            )
+        }
+        return subtracters
+    }
+
     render() {
         return (
             <div>
-
-                <Adder adderValue={firstValue} onClickFuncion={this.add} />
-                <Adder adderValue={secondValue} onClickFuncion={this.add} />
-                <Adder adderValue={thirdValue} onClickFuncion={this.add} />
-                <Adder adderValue={fourthValue} onClickFuncion={this.add} />
-                <Adder adderValue={fifthValue} onClickFuncion={this.add} />
-                <Adder adderValue={sixthValue} onClickFuncion={this.add} />
-                <Adder adderValue={seventhValue} onClickFuncion={this.add} />
+                {this.createAdderButtons()}
                 <Result counter={this.state.counter} />
-                <Subtracter subtracterValue={firstValue} onClickFuncion={this.subtract} />
-                <Subtracter subtracterValue={secondValue} onClickFuncion={this.subtract} />
-                <Subtracter subtracterValue={thirdValue} onClickFuncion={this.subtract} />
-                <Subtracter subtracterValue={100} onClickFuncion={this.subtract} />
-                <Subtracter subtracterValue={1000} onClickFuncion={this.subtract} />
+                {this.createSubtractButtons()}
             </div>
         );
     }
