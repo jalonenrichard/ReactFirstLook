@@ -113,7 +113,7 @@ const Card = (props) => {
 const CardList = (props) => {
     return (
         <div>
-            {props.cards.map(card => <Card {...card} />)}
+            {props.cards.map(card => <Card key={card.card_id} {...card} />)}
         </div>
     );
 };
@@ -135,10 +135,10 @@ class SearchForm extends React.Component {
                 console.log(resp);
                 //let i;
                 //for (let i = 0; i < resp.data.length; i++) {
-                if (resp.data[0].imgGold == null)
+                /* if (resp.data[0].imgGold == null)
                     var card = { card_image_url: "https://via.placeholder.com/150", card_name: resp.data[0].name, card_effect: resp.data[0].text };
-                else
-                    var card = { card_image_url: resp.data[0].imgGold, card_name: resp.data[0].name, card_effect: resp.data[0].text };
+                else */
+                var card = { card_id: resp.data[0].cardId, card_image_url: resp.data[0].imgGold, card_name: resp.data[0].name, card_effect: resp.data[0].text };
                 this.props.onSubmit(card);
                 this.setState({ userTypedCardName: '' });
                 //}
