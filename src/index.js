@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 //import CardList from './hsApi';
 //var React = require('react');
 //var ReactDOM = require('react-dom');
@@ -109,17 +110,6 @@ const Card = (props) => {
     );
 };
 
-let data = [{
-    card_image_url: "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_571.png",
-    card_name: "Force of Nature",
-    card_effect: "Summon three 2/2 Treants."
-}, {
-    card_image_url: "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_571.png",
-    card_name: "Force of Nature",
-    card_effect: "Summon three 2/2 Treants."
-}
-];
-
 const CardList = (props) => {
     return (
         <div>
@@ -128,5 +118,71 @@ const CardList = (props) => {
     );
 };
 
+class SearchForm extends React.Component {
+    state = { userTypedCardName: '' };
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        console.log('Event from submit. Value: ', this.state.userTypedCardName);
+
+        axios({
+            mehtod: 'get',
+            //url: `https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/${this.state.userTypedCardName}`,
+            url: `https://omgvamp-hearthstone-v1.p.mashape.com/cards/${this.state.userTypedCardName}`,
+            headers: { 'X-Mashape-Key': 'ymp1iOVLFAmsh4ws64FZBzJeaBPMp1qJT2bjsnUZ5UJU1PtxLx' }
+        })
+            .then(resp => {
+                console.log(resp);
+                //let i;
+                //for (let i = 0; i < resp.data.length; i++) {
+                if (resp.data[0].imgGold == null)
+                    var card = { card_image_url: "https://via.placeholder.com/150", card_name: resp.data[0].name, card_effect: resp.data[0].text };
+                else
+                    var card = { card_image_url: resp.data[0].imgGold, card_name: resp.data[0].name, card_effect: resp.data[0].text };
+                this.props.onSubmit(card);
+                this.setState({ userTypedCardName: '' });
+                //}
+                /* var card = { card_image_url: resp.data[0].img, card_name: resp.data[0].name, card_effect: resp.data[0].text };
+                this.props.onSubmit(card); */
+            });
+    };
+
+    render() {
+        return (
+            <form class="form-inline" onSubmit={this.handleSubmit}>
+                <input id="hsAppInputField"
+                    //ref={(userTypedCardName) => this.hsCardNameInput = userTypedCardName}
+                    value={this.state.userTypedCardName}
+                    onChange={(event) => this.setState({ userTypedCardName: event.target.value })}
+                    class="form-control" type="text" placeholder="Card name" required />
+                <button id="hsAppSubmitButton" class="btn btn-info" type="submit">Add</button>
+            </form>
+        );
+    }
+}
+
+class HsApp extends React.Component {
+    state = {
+        cards: [
+
+        ]
+    };
+
+    addNewCard = (cardInfo) => {
+        this.setState(prevState => ({
+            cards: prevState.cards.concat(cardInfo)
+        }));
+    }
+
+    render() {
+        return (
+            <div>
+                <SearchForm onSubmit={this.addNewCard} />
+                <CardList cards={this.state.cards} />
+            </div>
+        );
+    }
+}
+
 ReactDOM.render(<App />, rootElement);
-ReactDOM.render(<CardList cards={data} />, rootElement2);
+ReactDOM.render(<HsApp />, rootElement2);
