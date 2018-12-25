@@ -5,8 +5,8 @@ import ReactDOM from 'react-dom';
 
 var addButonText = '+';
 var subtractButtonText = '-';
-var rootElement = document.getElementById("root");
-var values = [1, 5, 10, 50, 100, 500, 1000];
+var rootElement = document.getElementById("counter");
+var values = [1, 5, 10, 50, 100, 500];
 
 class Adder extends React.Component {
     handleClick = () => {
@@ -15,12 +15,11 @@ class Adder extends React.Component {
 
     render() {
         return (
-            <button onClick={this.handleClick}>
+            <button type="button" class="btn btn-success" onClick={this.handleClick}>
                 {addButonText}{this.props.adderValue}
             </button>
         );
     }
-
 }
 
 class Subtracter extends React.Component {
@@ -30,7 +29,7 @@ class Subtracter extends React.Component {
 
     render() {
         return (
-            <button onClick={this.handleClick}>
+            <button type="button" class="btn btn-danger" onClick={this.handleClick}>
                 {subtractButtonText}{this.props.subtracterValue}
             </button>
         );
@@ -42,8 +41,6 @@ var Result = (props) => {
         <div>{props.counter}</div>
     );
 };
-
-
 
 class App extends React.Component {
     state = { counter: 0 };
@@ -83,10 +80,16 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
-                {this.createAdderButtons()}
-                <Result counter={this.state.counter} />
-                {this.createSubtractButtons()}
+            <div class="container">
+                <div id="counterAddButtons" class="btn-group">
+                    {this.createAdderButtons()}
+                </div>
+                <div id="counterResult">
+                    <Result counter={this.state.counter} />
+                </div>
+                <div id="counterSubtractButtons" class="btn-group">
+                    {this.createSubtractButtons()}
+                </div>
             </div>
         );
     }
