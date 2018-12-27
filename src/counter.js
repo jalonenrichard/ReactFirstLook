@@ -78,17 +78,27 @@ class CounterApp extends React.Component {
 
     render() {
         return (
-            <div class="container">
-                <div id="counterAddButtons" class="btn-group">
-                    {this.createAdderButtons()}
-                </div>
-                <div id="counterResult">
-                    <Result counter={this.state.counter} />
-                </div>
-                <div id="counterSubtractButtons" class="btn-group">
-                    {this.createSubtractButtons()}
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card mb-12 box-shadow">
+                        <h5 class="card-header">Counter</h5>
+                        <div id="counter" class="card-body">
+                            <div class="container">
+                                <div id="counterAddButtons" class="btn-group">
+                                    {this.createAdderButtons()}
+                                </div>
+                                <div id="counterResult">
+                                    <Result counter={this.state.counter} />
+                                </div>
+                                <div id="counterSubtractButtons" class="btn-group">
+                                    {this.createSubtractButtons()}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         );
     }
 }

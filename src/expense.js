@@ -8,15 +8,25 @@ import React from 'react';
 class ExpenseApp extends React.Component {
     render() {
         return (
-            <form class="form-inline" onSubmit={this.handleSubmit}>
-                <input
-                    id="expenseInput"
-                    class="form-control"
-                    type="text"
-                    placeholder="Expense ID"
-                />
-                <button id="expenseSubmit" class="btn btn-info submit-button" type="submit">Search</button>
-            </form>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card mb-12 box-shadow">
+                        <h5 class="card-header">Expenses Api Presentation</h5>
+                        <div id="expenses" class="card-body">
+                            <form class="form-inline" onSubmit={this.handleSubmit}>
+                                <input
+                                    id="expenseInput"
+                                    class="form-control"
+                                    type="text"
+                                    placeholder="Expense ID"
+                                />
+                                <button id="expenseSubmit" class="btn btn-info submit-button" type="submit">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         );
     }
 }

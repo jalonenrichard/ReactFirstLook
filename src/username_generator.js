@@ -8,15 +8,27 @@ class UserGenerator extends React.Component {
 
     render() {
         return (
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" value={this.state.text} />
-                <div class="input-group-append">
-                    <button class="btn btn-outline-info" type="button" type="submit" onClick={() => {
-                        //username = GenerateRandomUsername();
-                        this.setState({ text: GenerateRandomUsername() });
-                    }}>Generate</button>
+            <div class="row">
+                <div class="col-md-8" id="username_col">
+                    <div class="card mb-8 box-shadow">
+                        <h5 class="card-header">Username Generator</h5>
+                        <div id="username_generator" class="card-body">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" value={this.state.text} />
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-info" type="button" type="submit"
+                                        onClick={() => {
+                                            //username = GenerateRandomUsername();
+                                            this.setState({ text: GenerateRandomUsername() });
+                                        }}>Generate
+                                        </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         );
     }
 }

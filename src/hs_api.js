@@ -90,9 +90,16 @@ class HsApp extends React.Component {
 
     render() {
         return (
-            <div>
-                <SearchForm onSubmit={this.addNewCard} />
-                <CardList cards={this.state.cards} />
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card mb-12 box-shadow">
+                        <h5 class="card-header">HS API data</h5>
+                        <div id="hsApi" class="card-body"><div>
+                            <SearchForm onSubmit={this.addNewCard} />
+                            <CardList cards={this.state.cards} />
+                        </div></div>
+                    </div>
+                </div>
             </div>
         );
     }
