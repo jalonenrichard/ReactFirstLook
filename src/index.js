@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import renderHTML from 'react-render-html';
 //import CardList from './hsApi';
 //var React = require('react');
 //var ReactDOM = require('react-dom');
 
-var addButonText = '+';
-var subtractButtonText = '-';
-var rootElement = document.getElementById("counter");
-const rootElement2 = document.getElementById("hsApi");
-var values = [1, 5, 10, 50, 100, 500];
+const addButonText = '+';
+const subtractButtonText = '-';
+const counterRoot = document.getElementById("counter");
+const hsApiRoot = document.getElementById("hsApi");
+const expenseApiRoot = document.getElementById("expenses");
+const values = [1, 5, 10, 50, 100, 500];
+
+////////// Counter App //////////
 
 class Adder extends React.Component {
     handleClick = () => {
@@ -98,15 +102,29 @@ class App extends React.Component {
     }
 }
 
+
+////////// HS API APP //////////
 const Card = (props) => {
+    //let cardeffect = props.card_effect.split('/n').map(line => <p>{line}</p>);
+    //let cardeffect = renderHTML(cardeffect);
+    //cardeffect = reactStringReplace(cardeffect, /(\n)/g, () => <br />);
+    //cardeffect
+    /* cardeffect = cardeffect.split('\n').map((item, i) => {
+        return <p key={i}>{item}</p>;
+    }); */
     return (
-        <div style={{ margin: '1em' }}>
-            <img style={{ width: '150px', objectFit: 'contain' }} src={props.card_image_url} />
-            <div style={{ display: 'inline-block', marginLeft: 10 }}>
-                <div style={{ fontSize: '1.25em', fontWeight: 'bold' }}>{props.card_name}</div>
-                <div>{props.card_effect}</div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <img style={{ width: '150px', objectFit: 'contain' }} src={props.card_image_url} />
+                </div>
+                <div class="col-8">
+                    <div style={{ fontSize: '1.25em', fontWeight: 'bold' }}>{props.card_name}</div>
+                    <div id="cardEffectDiv">{renderHTML(props.card_effect)}</div>
+                </div>
             </div>
         </div>
+
     );
 };
 
@@ -127,21 +145,22 @@ class SearchForm extends React.Component {
 
         axios({
             mehtod: 'get',
-            //url: `https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/${this.state.userTypedCardName}`,
-            url: `https://omgvamp-hearthstone-v1.p.mashape.com/cards/${this.state.userTypedCardName}`,
+            url: `https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/${this.state.userTypedCardName}?collectible=1`,
+            //url: `https://omgvamp-hearthstone-v1.p.mashape.com/cards/${this.state.userTypedCardName}`,
             headers: { 'X-Mashape-Key': 'ymp1iOVLFAmsh4ws64FZBzJeaBPMp1qJT2bjsnUZ5UJU1PtxLx' }
         })
             .then(resp => {
                 console.log(resp);
                 //let i;
-                //for (let i = 0; i < resp.data.length; i++) {
-                /* if (resp.data[0].imgGold == null)
-                    var card = { card_image_url: "https://via.placeholder.com/150", card_name: resp.data[0].name, card_effect: resp.data[0].text };
-                else */
-                var card = { card_id: resp.data[0].cardId, card_image_url: resp.data[0].imgGold, card_name: resp.data[0].name, card_effect: resp.data[0].text };
-                this.props.onSubmit(card);
+                for (let i = 0; i < resp.data.length; i++) {
+                    if (resp.data[i].imgGold == null)
+                        var card = { card_id: resp.data[i].cardId, card_image_url: "https://via.placeholder.com/150", card_name: resp.data[i].name, card_effect: resp.data[i].text };
+                    else
+                        var card = { card_id: resp.data[i].cardId, card_image_url: resp.data[i].imgGold, card_name: resp.data[i].name, card_effect: resp.data[i].text };
+                    this.props.onSubmit(card);
+
+                }
                 this.setState({ userTypedCardName: '' });
-                //}
                 /* var card = { card_image_url: resp.data[0].img, card_name: resp.data[0].name, card_effect: resp.data[0].text };
                 this.props.onSubmit(card); */
             });
@@ -155,7 +174,7 @@ class SearchForm extends React.Component {
                     value={this.state.userTypedCardName}
                     onChange={(event) => this.setState({ userTypedCardName: event.target.value })}
                     class="form-control" type="text" placeholder="Card name" required />
-                <button id="hsAppSubmitButton" class="btn btn-info" type="submit">Add</button>
+                <button id="hsAppSubmitButton" class="btn btn-info submit-button" type="submit">Add</button>
             </form>
         );
     }
@@ -184,5 +203,27 @@ class HsApp extends React.Component {
     }
 }
 
-ReactDOM.render(<App />, rootElement);
-ReactDOM.render(<HsApp />, rootElement2);
+////////// Expense Api App //////////
+
+//http://localhost:8080/api/v1/expenses - all expenses
+//http://localhost:8080/api/v1/expenses/{id} - specific expense
+
+class ExpenseTable extends React.Component {
+    render() {
+        return (
+            <form class="form-inline" onSubmit={this.handleSubmit}>
+                <input
+                    id="expenseInput"
+                    class="form-control"
+                    type="text"
+                    placeholder="Expense ID"
+                />
+                <button id="expenseSubmit" class="btn btn-info submit-button" type="submit">Search</button>
+            </form>
+        );
+    }
+}
+
+ReactDOM.render(<App />, counterRoot);
+ReactDOM.render(<HsApp />, hsApiRoot);
+ReactDOM.render(<ExpenseTable />, expenseApiRoot)
