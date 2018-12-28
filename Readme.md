@@ -15,7 +15,12 @@ Pluralsight course link:
 
 ## Running locally
 
->From project root command line execute:
+From project root command line execute:
+>First time - to install modules
+```node.js
+npm i
+```
+>To start the project
 ```node.js
 npm start
 ```
