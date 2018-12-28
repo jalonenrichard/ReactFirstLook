@@ -59,12 +59,16 @@ export default class Navigator extends React.Component {
                                     Applications
                                 </DropdownToggle>
                                 <DropdownMenu right>
+                                    
                                     <DropdownItem onClick={this.openUsernameApp} href="#">
                                         Username Generator
                                     </DropdownItem>
+
                                     <DropdownItem onClick={this.openCounterApp} href="#">
                                         Counter
-                                     </DropdownItem>
+                                    </DropdownItem>
+
+
 
                                     <DropdownItem divider />
                                     <DropdownItem onClick={this.openAllApps} href="#">
