@@ -4,6 +4,7 @@
   "description": "",
   "keywords": [],
   "main": "src/index.js",
+  "style": "public/style.css",
   "dependencies": {
     "axios": "^0.18.0",
     "react": "16.5.2",

@@ -41,7 +41,10 @@ var Result = (props) => {
 };
 
 class CounterApp extends React.Component {
-    state = { counter: 0 };
+    state = {
+        counter: 0,
+        description_text: "Very first app that simply changes a text value based on button clicks."
+    };
 
     add = (incValue) => {
         this.setState((prevState) => ({
@@ -79,10 +82,11 @@ class CounterApp extends React.Component {
     render() {
         return (
             <div class="row">
-                <div class="col-sm-12">
-                    <div class="card mb-12 box-shadow">
-                        <h5 class="card-header">Counter</h5>
+                <div class="col-md-8">
+                    <div class="card mb-8 box-shadow text-center">
                         <div id="counter" class="card-body">
+                            <h4 class="card-title">Counter</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">{this.state.description_text}</h6>
                             <div class="container">
                                 <div id="counterAddButtons" class="btn-group">
                                     {this.createAdderButtons()}

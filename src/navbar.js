@@ -17,11 +17,12 @@ import UserGenerator from './username_generator';
 import HsApp from './hs_api';
 import CounterApp from './counter';
 import ExpenseApp from './expense';
+import AllApps from './all_apps';
 
 const pageName = 'react-first-look';
-const contentRoot = document.getElementById("root");
+const contentRoot = document.getElementById("pageContent");
 
-export default class NavBar extends React.Component {
+export default class Navigator extends React.Component {
     constructor(props) {
         super(props);
 
@@ -35,26 +36,24 @@ export default class NavBar extends React.Component {
             isOpen: !this.state.isOpen
         });
     }
+
     openCounterApp = () => {
         ReactDOM.render(<CounterApp />, contentRoot)
     };
     openUsernameApp = () => {
         ReactDOM.render(<UserGenerator />, contentRoot)
     };
+    openAllApps = () => {
+        ReactDOM.render(<AllApps />, contentRoot);
+    };
     render() {
         return (
             <div>
-                <Navbar color="light" light expand="md">
+                <Navbar color="dark" dark expand="md">
                     <NavbarBrand href="/">{pageName}</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <NavLink >Components</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-                            </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
                                     Applications
@@ -68,11 +67,14 @@ export default class NavBar extends React.Component {
                                      </DropdownItem>
 
                                     <DropdownItem divider />
-                                    <DropdownItem>
-                                        Reset
+                                    <DropdownItem onClick={this.openAllApps} href="#">
+                                        Show All
                                     </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
+                            <NavItem>
+                                <NavLink href="https://github.com/jalonenrichard/ReactFirstLook" target="_blank">GitHub</NavLink>
+                            </NavItem>
                         </Nav>
                     </Collapse>
                 </Navbar>
@@ -80,5 +82,3 @@ export default class NavBar extends React.Component {
         );
     }
 }
-
-ReactDOM.render(<NavBar />, contentRoot);

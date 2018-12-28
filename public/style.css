@@ -1,13 +1,45 @@
+html, body {
+  font-family: 'Roboto', sans-serif;
+}
+
 #counterResult {
-    margin:.4em;
-    font-size: 2em;
+  margin: .4em;
+  font-size: 2em;
 }
-.submit-button{
-    margin-left: 1em;
+
+.submit-button {
+  margin-left: 1em;
 }
-.row{
-    margin-bottom: 1%;
+
+.row {
+  margin-bottom: 1%;
 }
-#hs_app_search{
-    margin-bottom: 55em;
+
+#hs_app_search {
+  margin-bottom: 55em;
+}
+
+.col-md-8 {
+  margin: 0 auto;
+}
+
+#navigation {
+  margin-bottom: 2em;
+}
+
+#pageContent {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.welcomeDiv {
+  margin-bottom: 2em;
+}
+
+.linkDiv {
+  margin-top: 1em;
+}
+
+.card-subtitle {
+  padding-bottom: 1em;
 }
