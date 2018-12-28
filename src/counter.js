@@ -13,7 +13,7 @@ class Adder extends React.Component {
 
     render() {
         return (
-            <button type="button" class="btn btn-success" onClick={this.handleClick}>
+            <button type="button" className="btn btn-success" onClick={this.handleClick}>
                 {addButonText}{this.props.adderValue}
             </button>
         );
@@ -27,7 +27,7 @@ class Subtracter extends React.Component {
 
     render() {
         return (
-            <button type="button" class="btn btn-danger" onClick={this.handleClick}>
+            <button type="button" className="btn btn-danger" onClick={this.handleClick}>
                 {subtractButtonText}{this.props.subtracterValue}
             </button>
         );
@@ -62,7 +62,7 @@ class CounterApp extends React.Component {
 
         for (let i = 0; i < values.length; i++) {
             adders.push(
-                <Adder adderValue={values[i]} onClickFuncion={this.add} />
+                <Adder key={i.toString()} adderValue={values[i]} onClickFuncion={this.add} />
             )
         }
         return adders
@@ -73,7 +73,7 @@ class CounterApp extends React.Component {
 
         for (let i = 0; i < values.length; i++) {
             subtracters.push(
-                <Subtracter subtracterValue={values[i]} onClickFuncion={this.subtract} />
+                <Subtracter key={i.toString()} subtracterValue={values[i]} onClickFuncion={this.subtract} />
             )
         }
         return subtracters
@@ -81,20 +81,20 @@ class CounterApp extends React.Component {
 
     render() {
         return (
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="card mb-8 box-shadow text-center">
-                        <div id="counter" class="card-body">
-                            <h4 class="card-title">Counter</h4>
-                            <h6 class="card-subtitle mb-2 text-muted">{this.state.description_text}</h6>
-                            <div class="container">
-                                <div id="counterAddButtons" class="btn-group">
+            <div className="row">
+                <div className="col-md-8">
+                    <div className="card mb-8 box-shadow text-center">
+                        <div id="counter" className="card-body">
+                            <h4 className="card-title">Counter</h4>
+                            <h6 className="card-subtitle mb-2 text-muted">{this.state.description_text}</h6>
+                            <div className="container">
+                                <div id="counterAddButtons" className="btn-group">
                                     {this.createAdderButtons()}
                                 </div>
                                 <div id="counterResult">
                                     <Result counter={this.state.counter} />
                                 </div>
-                                <div id="counterSubtractButtons" class="btn-group">
+                                <div id="counterSubtractButtons" className="btn-group">
                                     {this.createSubtractButtons()}
                                 </div>
                             </div>

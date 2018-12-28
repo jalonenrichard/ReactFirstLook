@@ -14,9 +14,7 @@ import {
 } from 'reactstrap';
 import ReactDOM from 'react-dom';
 import UserGenerator from './username_generator';
-import HsApp from './hs_api';
 import CounterApp from './counter';
-import ExpenseApp from './expense';
 import AllApps from './all_apps';
 
 const pageName = 'react-first-look';

@@ -29,49 +29,49 @@ class Welcome extends React.Component {
         return (
             <div>
 
-                <div class="welcomeDiv">
+                <div className="welcomeDiv">
                     <h3>{this.state.headers.whoHeader}</h3>
                     <p>{this.state.paragraphs.whoParagraph}</p>
                 </div>
 
-                <div class="welcomeDiv">
+                <div className="welcomeDiv">
                     <h3>{this.state.headers.whatHeader}</h3>
                     <p>{this.state.paragraphs.whatParagraph}</p>
                 </div>
 
-                <div class="welcomeDiv">
+                <div className="welcomeDiv">
                     <h3>{this.state.headers.whyHeader}</h3>
                     <p>{this.state.paragraphs.whyParagraph}</p>
                 </div>
 
-                <div class="welcomeDiv">
+                <div className="welcomeDiv">
                     <h3>{this.state.headers.informationSources}</h3>
-                    <p>
-                        <div class="linkDiv">
+                    <div>
+                        <div className="linkDiv">
                             {this.state.paragraphs.pluralsightInformation}
                             <br />
-                            <a href={'' + this.state.links.pluralsightLink} target="_blank">
+                            <a href={'' + this.state.links.pluralsightLink} target="_blank" rel="noopener noreferrer">
                                 {this.state.links.pluralsight}
                             </a>
                             <br />
                         </div>
-                        <div class="linkDiv">
+                        <div className="linkDiv">
                             {this.state.paragraphs.zeitInformation}
                             <br />
-                            <a href={'' + this.state.links.zeitLink} target="_blank">
+                            <a href={'' + this.state.links.zeitLink} target="_blank" rel="noopener noreferrer">
                                 {this.state.links.zeit}
                             </a>
                             <br />
                         </div>
-                        <div class="linkDiv">
+                        <div className="linkDiv">
                             {this.state.paragraphs.navBarInformation}
                             <br />
-                            <a href={'' + this.state.links.navBarLink} target="_blank">
+                            <a href={'' + this.state.links.navBarLink} target="_blank" rel="noopener noreferrer">
                                 {this.state.links.navBar}
                             </a>
                             <br />
                         </div>
-                    </p>
+                    </div>
                 </div>
 
             </div>

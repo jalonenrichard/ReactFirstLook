@@ -9,7 +9,7 @@ const Card = (props) => {
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-4">
-                    <img style={{ width: '150px', objectFit: 'contain' }} src={props.card_image_url} />
+                    <img style={{ width: '150px', objectFit: 'contain' }} src={props.card_image_url} alt="Card"/>
                 </div>
                 <div class="col-8">
                     <div style={{ fontSize: '1.25em', fontWeight: 'bold' }}>{props.card_name}</div>
