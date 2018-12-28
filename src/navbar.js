@@ -15,6 +15,7 @@ import {
 import ReactDOM from 'react-dom';
 import UserGenerator from './username_generator';
 import CounterApp from './counter';
+import HsApp from './hs_api';
 import AllApps from './all_apps';
 
 const pageName = 'react-first-look';
@@ -38,6 +39,9 @@ export default class Navigator extends React.Component {
     openCounterApp = () => {
         ReactDOM.render(<CounterApp />, contentRoot)
     };
+    openHearthstoneApp = () => {
+        ReactDOM.render(<HsApp />, contentRoot)
+    };
     openUsernameApp = () => {
         ReactDOM.render(<UserGenerator />, contentRoot)
     };
@@ -48,7 +52,10 @@ export default class Navigator extends React.Component {
         return (
             <div>
                 <Navbar color="dark" dark expand="md">
-                    <NavbarBrand href="/">{pageName}</NavbarBrand>
+                    <NavbarBrand href="/">
+                        <img src={require('./images/react_logo.png')} width="50em" />
+                        {pageName}
+                    </NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
@@ -57,9 +64,13 @@ export default class Navigator extends React.Component {
                                     Applications
                                 </DropdownToggle>
                                 <DropdownMenu right>
-                                    
+
                                     <DropdownItem onClick={this.openUsernameApp} href="#">
                                         Username Generator
+                                    </DropdownItem>
+
+                                    <DropdownItem onClick={this.openHearthstoneApp} href="#">
+                                        Hearthstone API GET
                                     </DropdownItem>
 
                                     <DropdownItem onClick={this.openCounterApp} href="#">

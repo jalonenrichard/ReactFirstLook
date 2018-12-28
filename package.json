@@ -8,7 +8,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "react": "16.5.2",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "16.5.2",
+    "react-notifications": "^1.4.3",
     "react-render-html": "^0.6.0",
     "react-scripts": "2.0.3",
     "reactstrap": "^6.5.0",

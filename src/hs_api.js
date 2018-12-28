@@ -6,12 +6,12 @@ import renderHTML from 'react-render-html';
 
 const Card = (props) => {
     return (
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-4">
-                    <img style={{ width: '150px', objectFit: 'contain' }} src={props.card_image_url} alt="Card"/>
+        <div className="container">
+            <div className="row align-items-center">
+                <div className="col-4">
+                    <img style={{ width: '150px', objectFit: 'contain' }} src={props.card_image_url} onError={(e) => { e.target.src = require('./images/Card_back-Default.png'); e.target.width = '100px' }} alt="[Card art not found.]" />
                 </div>
-                <div class="col-8">
+                <div className="col-8">
                     <div style={{ fontSize: '1.25em', fontWeight: 'bold' }}>{props.card_name}</div>
                     <div id="cardEffectDiv">
                         {renderHTML(props.card_effect)}
@@ -37,39 +37,41 @@ class SearchForm extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault();
         console.log('Event from submit. Value: ', this.state.userTypedCardName);
+        try {
+            axios({
+                mehtod: 'get',
+                //url: `https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/${this.state.userTypedCardName}?collectible=1`,
+                url: `https://omgvamp-hearthstone-v1.p.mashape.com/cards/${this.state.userTypedCardName}?collectible=1`,
+                headers: { 'X-Mashape-Key': 'ymp1iOVLFAmsh4ws64FZBzJeaBPMp1qJT2bjsnUZ5UJU1PtxLx' }
+            })
+                .then(resp => {
+                    console.log(resp);
+                    for (let i = 0; i < resp.data.length; i++) {
+                        if (resp.data[i].imgGold == null)
+                            var card = { card_id: resp.data[i].cardId, card_image_url: "https://via.placeholder.com/150", card_name: resp.data[i].name, card_effect: resp.data[i].text };
+                        else
+                            var card = { card_id: resp.data[i].cardId, card_image_url: resp.data[i].imgGold, card_name: resp.data[i].name, card_effect: resp.data[i].text };
+                        this.props.onSubmit(card);
 
-        axios({
-            mehtod: 'get',
-            url: `https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/${this.state.userTypedCardName}?collectible=1`,
-            //url: `https://omgvamp-hearthstone-v1.p.mashape.com/cards/${this.state.userTypedCardName}`,
-            headers: { 'X-Mashape-Key': 'ymp1iOVLFAmsh4ws64FZBzJeaBPMp1qJT2bjsnUZ5UJU1PtxLx' }
-        })
-            .then(resp => {
-                console.log(resp);
-                //let i;
-                for (let i = 0; i < resp.data.length; i++) {
-                    if (resp.data[i].imgGold == null)
-                        var card = { card_id: resp.data[i].cardId, card_image_url: "https://via.placeholder.com/150", card_name: resp.data[i].name, card_effect: resp.data[i].text };
-                    else
-                        var card = { card_id: resp.data[i].cardId, card_image_url: resp.data[i].imgGold, card_name: resp.data[i].name, card_effect: resp.data[i].text };
-                    this.props.onSubmit(card);
+                    }
+                    this.setState({ userTypedCardName: '' });
+                    /* var card = { card_image_url: resp.data[0].img, card_name: resp.data[0].name, card_effect: resp.data[0].text };
+                    this.props.onSubmit(card); */
+                });
+        } catch {
 
-                }
-                this.setState({ userTypedCardName: '' });
-                /* var card = { card_image_url: resp.data[0].img, card_name: resp.data[0].name, card_effect: resp.data[0].text };
-                this.props.onSubmit(card); */
-            });
+        }
     };
 
     render() {
         return (
-            <form class="form-inline" onSubmit={this.handleSubmit}>
+            <form className="form-inline" style={{ marginBottom: '2em' }} onSubmit={this.handleSubmit}>
                 <input id="hsAppInputField"
                     //ref={(userTypedCardName) => this.hsCardNameInput = userTypedCardName}
                     value={this.state.userTypedCardName}
                     onChange={(event) => this.setState({ userTypedCardName: event.target.value })}
-                    class="form-control" type="text" placeholder="Card name" required />
-                <button id="hsAppSubmitButton" class="btn btn-info submit-button" type="submit">Add</button>
+                    className="form-control" type="text" placeholder="Card name" required />
+                <button id="hsAppSubmitButton" className="btn btn-info submit-button" type="submit">Add</button>
             </form>
         );
     }
@@ -79,7 +81,8 @@ class HsApp extends React.Component {
     state = {
         cards: [
 
-        ]
+        ],
+        description_text: "Search Hearthstone cards by name. Example value: Voidwalker. NB! Still buggy, may crash."
     };
 
     addNewCard = (cardInfo) => {
@@ -90,14 +93,16 @@ class HsApp extends React.Component {
 
     render() {
         return (
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card mb-12 box-shadow">
-                        <h5 class="card-header">HS API data</h5>
-                        <div id="hsApi" class="card-body"><div>
+
+            <div className="row">
+                <div className="col-md-8">
+                    <div className="card mb-8 box-shadow">
+                        <div className="card-body">
+                            <h4 className="card-title">Hearthstone API Card Search</h4>
+                            <h6 className="card-subtitle mb-2 text-muted">{this.state.description_text}</h6>
                             <SearchForm onSubmit={this.addNewCard} />
                             <CardList cards={this.state.cards} />
-                        </div></div>
+                        </div>
                     </div>
                 </div>
             </div>
