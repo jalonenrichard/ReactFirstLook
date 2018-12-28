@@ -40,8 +40,8 @@
             "dest": "/index.html"
         },
         {
-            "src": "^/(.*)",
-            "dest": "/style.css"
+            "src": "style.css",
+            "use": "@now/html-minifier"
         }
     ]
 }
