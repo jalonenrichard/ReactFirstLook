@@ -6,5 +6,5 @@ import Welcome from './welcome';
 const navRoot = document.getElementById("navigation");
 const contentRoot = document.getElementById("pageContent");
 
-ReactDOM.render(<Navigator />, navRoot);
-ReactDOM.render(<Welcome />, contentRoot);
+ReactDOM.render( < Navigator / > , navRoot);
+ReactDOM.render( < Welcome / > , contentRoot);
