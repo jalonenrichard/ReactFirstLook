@@ -2,3 +2,4 @@ hs-api näitaks ainult ühte kaarti nime järgi ja kui ei leia, annaks teada
 menüü, kust saab rakendusi valida
 ühenda expense API ära
 pane expense API-le cloud database, google oma ntx
+Ilmateate App - yr.no lehelt votta ilmainfo ja kuvada näiteks järgmise 7 päeva ilmateade
