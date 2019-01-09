@@ -16,6 +16,7 @@ import ReactDOM from 'react-dom';
 import UserGenerator from './username_generator';
 import CounterApp from './counter';
 import HsApp from './hs_api';
+import Game from './tictactoe';
 import AllApps from './all_apps';
 
 const pageName = 'react-first-look';
@@ -45,6 +46,9 @@ export default class Navigator extends React.Component {
     openUsernameApp = () => {
         ReactDOM.render(<UserGenerator />, contentRoot)
     };
+    openTicTacToeApp = () => {
+        ReactDOM.render(<Game />, contentRoot)
+    };
     openAllApps = () => {
         ReactDOM.render(<AllApps />, contentRoot);
     };
@@ -67,6 +71,10 @@ export default class Navigator extends React.Component {
 
                                     <DropdownItem onClick={this.openUsernameApp} href="#">
                                         Username Generator
+                                    </DropdownItem>
+
+                                    <DropdownItem onClick={this.openTicTacToeApp} href="#">
+                                        TicTacToe
                                     </DropdownItem>
 
                                     <DropdownItem onClick={this.openHearthstoneApp} href="#">
